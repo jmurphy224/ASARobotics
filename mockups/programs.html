@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Programs — All Saints Academy Robotics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--navy:#16233F;--navy-deep:#0E1830;--gold:#BE9A3F;--gold-bright:#D8B85C;--paper:#F6F3EC;--ink:#20242B;--steel:#4E6E93;--copper:#A2542E;--line:rgba(22,35,63,0.14);--max:1120px;}
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3{font-family:'Source Serif 4',serif;margin:0;color:var(--navy-deep);font-weight:600;letter-spacing:-0.01em;}
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 28px;}
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--copper);outline-offset:3px;}
+  @media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important;}}
+
+  .topbar{position:sticky;top:0;z-index:50;background:rgba(246,243,236,0.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);}
+  .topbar-inner{display:flex;align-items:center;justify-content:space-between;padding:16px 28px;max-width:var(--max);margin:0 auto;}
+  .brand{display:flex;align-items:center;gap:12px;}
+  .brand-mark{width:38px;height:38px;border-radius:2px;background:var(--navy);display:flex;align-items:center;justify-content:center;color:var(--gold-bright);font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:13px;flex-shrink:0;}
+  .brand-name{font-family:'Source Serif 4',serif;font-weight:600;font-size:17px;color:var(--navy-deep);line-height:1.15;}
+  .brand-name span{display:block;font-family:'IBM Plex Sans',sans-serif;font-weight:500;font-size:11.5px;color:var(--steel);margin-top:1px;}
+  nav{display:flex;gap:30px;}
+  nav a{font-size:14.5px;font-weight:500;color:var(--navy);position:relative;padding:4px 0;}
+  nav a.active{color:var(--copper);}
+  nav a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--copper);transform:scaleX(0);transform-origin:left;transition:transform .18s ease;}
+  nav a:hover::after,nav a.active::after{transform:scaleX(1);}
+  .nav-cta{background:var(--navy);color:var(--paper) !important;padding:9px 18px;border-radius:2px;font-size:14px;font-weight:600;}
+  .nav-cta::after{display:none;}
+  .nav-cta:hover{background:var(--navy-deep);}
+
+  .crumb{padding:20px 28px 0;}
+  .crumb-inner{max-width:var(--max);margin:0 auto;font-size:13px;color:var(--steel);display:flex;gap:8px;align-items:center;}
+  .crumb-inner a:hover{color:var(--copper);}
+  .crumb-inner span{color:#a9a48f;}
+
+  .hero{position:relative;overflow:hidden;background:var(--navy);color:var(--paper);margin-top:16px;}
+  .hero-inner{max-width:var(--max);margin:0 auto;padding:64px 28px 68px;position:relative;z-index:2;max-width:720px;}
+  .hero-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--gold-bright);letter-spacing:0.04em;margin-bottom:16px;display:block;}
+  .hero h1{color:#fff;font-size:clamp(32px,4vw,46px);line-height:1.12;font-weight:600;}
+  .hero p.lede{margin-top:20px;font-size:16.5px;color:rgba(246,243,236,0.82);max-width:56ch;line-height:1.6;}
+  .hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(246,243,236,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(246,243,236,0.05) 1px,transparent 1px);background-size:44px 44px;z-index:1;}
+
+  .section{padding:76px 28px;}
+  .section-head{max-width:640px;margin-bottom:48px;}
+  .section-head h2{font-size:clamp(24px,3vw,32px);}
+  .section-head p{margin-top:14px;font-size:16px;color:#4b5262;line-height:1.6;}
+  .section-tag{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--copper);letter-spacing:0.03em;margin-bottom:14px;display:block;}
+
+  /* PROGRAM CARDS */
+  .prog-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+  .prog-card{background:#fff;padding:34px 28px;display:flex;flex-direction:column;}
+  .prog-card .stage-num{width:56px;height:56px;border-radius:50%;background:var(--paper);border:2px solid var(--navy);display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:13px;color:var(--navy);margin-bottom:20px;}
+  .prog-card .age{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--steel);letter-spacing:0.02em;}
+  .prog-card h3{font-size:22px;margin-top:8px;}
+  .prog-card p{font-size:14.5px;color:#565c6b;margin-top:12px;line-height:1.6;flex:1;}
+  .prog-card .meta{margin-top:16px;padding-top:14px;border-top:1px solid var(--line);font-size:13px;color:var(--copper);font-weight:600;}
+  .prog-card .go{display:inline-block;margin-top:16px;font-size:13.5px;font-weight:600;color:var(--steel);}
+  .prog-card .go:hover{color:var(--copper);}
+
+  /* COMPARISON TABLE */
+  .compare{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  table.cmp{width:100%;border-collapse:collapse;}
+  table.cmp th,table.cmp td{text-align:left;padding:16px 20px;border-bottom:1px solid var(--line);font-size:14.5px;}
+  table.cmp th{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:0.03em;color:var(--steel);text-transform:uppercase;font-weight:600;}
+  table.cmp td:first-child,table.cmp th:first-child{color:var(--navy-deep);font-weight:600;width:22%;}
+  table.cmp tbody tr:last-child td{border-bottom:none;}
+
+  /* NOT SURE BAND */
+  .helper{background:var(--navy-deep);color:var(--paper);}
+  .helper-inner{max-width:var(--max);margin:0 auto;padding:64px 28px;text-align:center;}
+  .helper h2{color:#fff;font-size:clamp(22px,3vw,28px);}
+  .helper p{color:rgba(246,243,236,0.75);margin-top:14px;font-size:15.5px;max-width:56ch;margin-left:auto;margin-right:auto;}
+  .helper .btn{margin-top:26px;}
+
+  .btn{padding:13px 24px;border-radius:2px;font-size:14.5px;font-weight:600;display:inline-flex;align-items:center;gap:8px;border:1px solid transparent;}
+  .btn-primary{background:var(--copper);color:#fff;}
+  .btn-primary:hover{background:#8a4526;}
+
+  footer{background:#fff;border-top:1px solid var(--line);}
+  .footer-inner{max-width:var(--max);margin:0 auto;padding:48px 28px 30px;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;}
+  .footer-brand p{font-size:13.5px;color:#6a7080;margin-top:14px;max-width:30ch;line-height:1.6;}
+  .footer-col h4{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--steel);letter-spacing:0.03em;margin-bottom:16px;font-weight:600;}
+  .footer-col a{display:block;font-size:14px;color:#3a3f49;margin-bottom:11px;}
+  .footer-col a:hover{color:var(--copper);}
+  .footer-bottom{max-width:var(--max);margin:0 auto;padding:20px 28px;border-top:1px solid var(--line);font-size:12.5px;color:#8a8f99;}
+
+  @media (max-width:860px){
+    nav{display:none;}
+    .prog-cards{grid-template-columns:1fr;}
+    table.cmp{font-size:13px;}
+    table.cmp th,table.cmp td{padding:12px;}
+    .footer-inner{grid-template-columns:1fr 1fr;row-gap:28px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="brand"><div class="brand-mark">ASA</div><div class="brand-name">All Saints Robotics<span>FLL Explore · FLL Challenge · FTC</span></div></div>
+    <nav>
+      <a href="#" class="active">Programs</a>
+      <a href="#">Teams</a>
+      <a href="#">Schedule</a>
+      <a href="#">Join us</a>
+      <a href="#" class="nav-cta">Join a Team</a>
+    </nav>
+  </div>
+</div>
+
+<div class="crumb"><div class="crumb-inner"><a href="#">Home</a><span>/</span><span style="color:var(--navy-deep);font-weight:600;">Programs</span></div></div>
+
+<section class="hero">
+  <div class="hero-inner">
+    <span class="hero-eyebrow">PROGRAMS</span>
+    <h1>One club. Three programs. A path in at every age.</h1>
+    <p class="lede">All Saints Academy Robotics runs three FIRST programs side by side, so a student who joins in kindergarten can stay in the same club all the way through high school.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-tag">CHOOSE A TRACK</span>
+      <h2>Find the right starting point</h2>
+      <p>Programs are grouped by grade, not skill — every track assumes zero prior experience.</p>
+    </div>
+    <div class="prog-cards">
+      <div class="prog-card">
+        <div class="stage-num">01</div>
+        <span class="age">GRADES K–4</span>
+        <h3>FLL Explore</h3>
+        <p>LEGO-based models built around a real-world theme, presented to a friendly review panel. No robot game, no scoreboard.</p>
+        <div class="meta">2 teams · Tuesdays</div>
+        <a href="#" class="go">See the Explore page →</a>
+      </div>
+      <div class="prog-card">
+        <div class="stage-num">02</div>
+        <span class="age">GRADES 4–7</span>
+        <h3>FLL Challenge</h3>
+        <p>An autonomous LEGO robot runs a scored table while the team researches a real problem and pitches a solution to judges.</p>
+        <div class="meta">4 teams · Wed &amp; Thu</div>
+        <a href="#" class="go">See the Challenge page →</a>
+      </div>
+      <div class="prog-card">
+        <div class="stage-num">03</div>
+        <span class="age">GRADES 7–12</span>
+        <h3>FIRST Tech Challenge</h3>
+        <p>A metal-and-motor robot, driven and autonomous, competing head to head against other schools toward the State Championship.</p>
+        <div class="meta">1 team · Mon, Wed, Sat</div>
+        <a href="#" class="go">See the FTC page →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="compare">
+  <div class="section wrap">
+    <div class="section-head">
+      <span class="section-tag">SIDE BY SIDE</span>
+      <h2>How the three programs differ</h2>
+    </div>
+    <table class="cmp">
+      <thead><tr><th>Program</th><th>Explore</th><th>Challenge</th><th>FTC</th></tr></thead>
+      <tbody>
+        <tr><td>Grades</td><td>K–4</td><td>4–7</td><td>7–12</td></tr>
+        <tr><td>Robot game</td><td>None</td><td>LEGO, scored table</td><td>Metal/motor, head-to-head</td></tr>
+        <tr><td>Team size</td><td>Up to 6</td><td>Up to 10</td><td>Up to 15</td></tr>
+        <tr><td>Season</td><td>Sept – Dec</td><td>Sept – Feb</td><td>Sept – April</td></tr>
+        <tr><td>Meets</td><td>Tuesdays</td><td>Wed &amp; Thu</td><td>Mon, Wed, Sat</td></tr>
+        <tr><td>Cost</td><td>$65</td><td>$110</td><td>$275</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="helper">
+  <div class="helper-inner">
+    <h2>Not sure which one fits?</h2>
+    <p>Tell us your student's grade and we'll point you to the right team — or a good waitlist if that team's full.</p>
+    <a href="#" class="btn btn-primary">Ask us which program fits</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand"><div class="brand"><div class="brand-mark">ASA</div><div class="brand-name">All Saints Robotics</div></div><p>A K–12 FIRST robotics program at All Saints Academy, Florissant, MO.</p></div>
+    <div class="footer-col"><h4>PROGRAM</h4><a href="#">FLL Explore</a><a href="#">FLL Challenge</a><a href="#">FIRST Tech Challenge</a></div>
+    <div class="footer-col"><h4>CLUB</h4><a href="#">Teams</a><a href="#">Schedule</a><a href="#">Join a team</a></div>
+  </div>
+  <div class="footer-bottom wrap">© 2026 All Saints Academy Robotics Club</div>
+</footer>
+
+</body>
+</html>

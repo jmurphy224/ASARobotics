@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Schedule — All Saints Academy Robotics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--navy:#16233F;--navy-deep:#0E1830;--gold:#BE9A3F;--gold-bright:#D8B85C;--paper:#F6F3EC;--ink:#20242B;--steel:#4E6E93;--copper:#A2542E;--line:rgba(22,35,63,0.14);--max:1120px;}
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3{font-family:'Source Serif 4',serif;margin:0;color:var(--navy-deep);font-weight:600;letter-spacing:-0.01em;}
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 28px;}
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--copper);outline-offset:3px;}
+
+  .topbar{position:sticky;top:0;z-index:50;background:rgba(246,243,236,0.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);}
+  .topbar-inner{display:flex;align-items:center;justify-content:space-between;padding:16px 28px;max-width:var(--max);margin:0 auto;}
+  .brand{display:flex;align-items:center;gap:12px;}
+  .brand-mark{width:38px;height:38px;border-radius:2px;background:var(--navy);display:flex;align-items:center;justify-content:center;color:var(--gold-bright);font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:13px;flex-shrink:0;}
+  .brand-name{font-family:'Source Serif 4',serif;font-weight:600;font-size:17px;color:var(--navy-deep);line-height:1.15;}
+  .brand-name span{display:block;font-family:'IBM Plex Sans',sans-serif;font-weight:500;font-size:11.5px;color:var(--steel);margin-top:1px;}
+  nav{display:flex;gap:30px;}
+  nav a{font-size:14.5px;font-weight:500;color:var(--navy);position:relative;padding:4px 0;}
+  nav a.active{color:var(--copper);}
+  nav a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--copper);transform:scaleX(0);transform-origin:left;transition:transform .18s ease;}
+  nav a:hover::after,nav a.active::after{transform:scaleX(1);}
+  .nav-cta{background:var(--navy);color:var(--paper) !important;padding:9px 18px;border-radius:2px;font-size:14px;font-weight:600;}
+  .nav-cta::after{display:none;}
+  .nav-cta:hover{background:var(--navy-deep);}
+
+  .crumb{padding:20px 28px 0;}
+  .crumb-inner{max-width:var(--max);margin:0 auto;font-size:13px;color:var(--steel);display:flex;gap:8px;align-items:center;}
+  .crumb-inner span{color:#a9a48f;}
+
+  .hero{background:var(--navy);color:var(--paper);margin-top:16px;}
+  .hero-inner{max-width:var(--max);margin:0 auto;padding:56px 28px 60px;max-width:720px;}
+  .hero-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--gold-bright);letter-spacing:0.04em;margin-bottom:16px;display:block;}
+  .hero h1{color:#fff;font-size:clamp(30px,3.6vw,42px);line-height:1.15;}
+  .hero p{margin-top:18px;font-size:16px;color:rgba(246,243,236,0.8);max-width:56ch;line-height:1.6;}
+
+  .legend{background:#fff;border-bottom:1px solid var(--line);}
+  .legend-row{display:flex;gap:22px;padding:16px 28px;max-width:var(--max);margin:0 auto;flex-wrap:wrap;}
+  .legend-item{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink);}
+  .dot{width:9px;height:9px;border-radius:50%;}
+  .dot-explore{background:var(--steel);}
+  .dot-challenge{background:var(--copper);}
+  .dot-ftc{background:var(--gold);}
+  .dot-all{background:var(--navy);}
+
+  .section{padding:56px 28px 80px;}
+  .month-head{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--steel);letter-spacing:0.04em;text-transform:uppercase;margin:44px 0 4px;padding-bottom:10px;border-bottom:1px solid var(--line);}
+  .month-head:first-child{margin-top:0;}
+
+  .sched-row{display:grid;grid-template-columns:90px 12px 1fr 170px;gap:16px;align-items:start;padding:20px 0;border-bottom:1px solid var(--line);}
+  .sched-row .date{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--navy-deep);font-weight:600;}
+  .sched-row .date span{display:block;font-size:11px;color:var(--steel);font-weight:500;}
+  .sched-row .dot{margin-top:5px;}
+  .sched-row .title{font-size:15.5px;font-weight:600;color:var(--navy-deep);}
+  .sched-row .sub{font-size:13.5px;color:#6a7080;margin-top:3px;}
+  .sched-row .loc{font-size:13px;color:#6a7080;text-align:right;}
+  .sched-row .loc b{display:block;color:var(--copper);font-size:12px;font-weight:600;}
+
+  footer{background:#fff;border-top:1px solid var(--line);}
+  .footer-inner{max-width:var(--max);margin:0 auto;padding:48px 28px 30px;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;}
+  .footer-brand p{font-size:13.5px;color:#6a7080;margin-top:14px;max-width:30ch;line-height:1.6;}
+  .footer-col h4{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--steel);letter-spacing:0.03em;margin-bottom:16px;font-weight:600;}
+  .footer-col a{display:block;font-size:14px;color:#3a3f49;margin-bottom:11px;}
+  .footer-col a:hover{color:var(--copper);}
+  .footer-bottom{max-width:var(--max);margin:0 auto;padding:20px 28px;border-top:1px solid var(--line);font-size:12.5px;color:#8a8f99;}
+
+  @media (max-width:860px){
+    nav{display:none;}
+    .sched-row{grid-template-columns:70px 10px 1fr;}
+    .sched-row .loc{grid-column:1/-1;text-align:left;margin-top:6px;}
+    .footer-inner{grid-template-columns:1fr 1fr;row-gap:28px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="brand"><div class="brand-mark">ASA</div><div class="brand-name">All Saints Robotics<span>FLL Explore · FLL Challenge · FTC</span></div></div>
+    <nav>
+      <a href="#">Programs</a>
+      <a href="#">Teams</a>
+      <a href="#" class="active">Schedule</a>
+      <a href="#">Join us</a>
+      <a href="#" class="nav-cta">Join a Team</a>
+    </nav>
+  </div>
+</div>
+
+<div class="crumb"><div class="crumb-inner"><a href="#">Home</a><span>/</span><span style="color:var(--navy-deep);font-weight:600;">Schedule</span></div></div>
+
+<section class="hero">
+  <div class="hero-inner">
+    <span class="hero-eyebrow">SCHEDULE</span>
+    <h1>The 2026–27 season, month by month</h1>
+    <p>Practices, qualifiers, and showcases across all three programs. Color dots show which team the event belongs to.</p>
+  </div>
+</section>
+
+<div class="legend">
+  <div class="legend-row">
+    <div class="legend-item"><span class="dot dot-explore"></span>FLL Explore</div>
+    <div class="legend-item"><span class="dot dot-challenge"></span>FLL Challenge</div>
+    <div class="legend-item"><span class="dot dot-ftc"></span>FTC</div>
+    <div class="legend-item"><span class="dot dot-all"></span>All teams</div>
+  </div>
+</div>
+
+<section class="section wrap">
+
+  <div class="month-head">September 2026</div>
+  <div class="sched-row"><div class="date">SEP 8<span>Tue</span></div><div class="dot dot-all"></div><div><div class="title">Season kickoff — all programs</div><div class="sub">Team assignments, kit reveals, and the Explore/Challenge theme announcement.</div></div><div class="loc"><b>ASA Gymnasium</b>4:00pm</div></div>
+  <div class="sched-row"><div class="date">SEP 15<span>Tue</span></div><div class="dot dot-explore"></div><div><div class="title">Explore build begins</div><div class="sub">Little Builders &amp; Trailblazers start their season models.</div></div><div class="loc"><b>ASA Robotics Shop</b>3:30pm</div></div>
+
+  <div class="month-head">October 2026</div>
+  <div class="sched-row"><div class="date">OCT 3<span>Sat</span></div><div class="dot dot-ftc"></div><div><div class="title">FTC scrimmage</div><div class="sub">Iron Saints — first practice matches of the season.</div></div><div class="loc"><b>ASA Gymnasium</b>9:00am</div></div>
+  <div class="sched-row"><div class="date">OCT 21<span>Wed</span></div><div class="dot dot-challenge"></div><div><div class="title">Open build night — Challenge teams</div><div class="sub">Gearhouse, Blackfriars, Junior Saints, and Circuit Squad share the shop.</div></div><div class="loc"><b>ASA Robotics Shop</b>3:30pm</div></div>
+
+  <div class="month-head">November 2026</div>
+  <div class="sched-row"><div class="date">NOV 15<span>Sun</span></div><div class="dot dot-challenge"></div><div><div class="title">FLL Challenge Qualifier — SUBMERGED</div><div class="sub">All four Challenge teams compete for a spot at the regional championship.</div></div><div class="loc"><b>Ritenour HS Fieldhouse</b>8:00am</div></div>
+  <div class="sched-row"><div class="date">NOV 22<span>Sun</span></div><div class="dot dot-ftc"></div><div><div class="title">FTC League Meet #2</div><div class="sub">Iron Saints — driven and autonomous matches.</div></div><div class="loc"><b>Parkway North HS</b>9:00am</div></div>
+
+  <div class="month-head">December 2026</div>
+  <div class="sched-row"><div class="date">DEC 6<span>Sun</span></div><div class="dot dot-explore"></div><div><div class="title">FLL Explore Showcase</div><div class="sub">Little Builders &amp; Trailblazers present to parent judges.</div></div><div class="loc"><b>ASA Gymnasium</b>1:00pm</div></div>
+  <div class="sched-row"><div class="date">DEC 12<span>Sat</span></div><div class="dot dot-ftc"></div><div><div class="title">FTC district qualifier</div><div class="sub">Iron Saints' first official matches against other district schools.</div></div><div class="loc"><b>TBD</b>8:00am</div></div>
+  <div class="sched-row"><div class="date">DEC 13<span>Sun</span></div><div class="dot dot-all"></div><div><div class="title">Open build night — all teams</div><div class="sub">Shop open to any ASA Robotics family, no signup needed.</div></div><div class="loc"><b>ASA Robotics Shop</b>Noon</div></div>
+
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand"><div class="brand"><div class="brand-mark">ASA</div><div class="brand-name">All Saints Robotics</div></div><p>A K–12 FIRST robotics program at All Saints Academy, Florissant, MO.</p></div>
+    <div class="footer-col"><h4>PROGRAM</h4><a href="#">FLL Explore</a><a href="#">FLL Challenge</a><a href="#">FIRST Tech Challenge</a></div>
+    <div class="footer-col"><h4>CLUB</h4><a href="#">Teams</a><a href="#">Schedule</a><a href="#">Join a team</a></div>
+  </div>
+  <div class="footer-bottom wrap">© 2026 All Saints Academy Robotics Club</div>
+</footer>
+
+</body>
+</html>

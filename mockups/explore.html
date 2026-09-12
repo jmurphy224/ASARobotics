@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FLL Explore — All Saints Academy Robotics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy: #16233F;
+    --navy-deep: #0E1830;
+    --gold: #BE9A3F;
+    --gold-bright: #D8B85C;
+    --paper: #F6F3EC;
+    --ink: #20242B;
+    --steel: #4E6E93;
+    --copper: #A2542E;
+    --line: rgba(22,35,63,0.14);
+    --max: 1120px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0; background:var(--paper); color:var(--ink); font-family:'IBM Plex Sans', sans-serif; line-height:1.5; -webkit-font-smoothing:antialiased;}
+  h1,h2,h3{font-family:'Source Serif 4', serif; margin:0; color:var(--navy-deep); font-weight:600; letter-spacing:-0.01em;}
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 28px;}
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--copper); outline-offset:3px;}
+  @media (prefers-reduced-motion: reduce){ *{animation:none !important; transition:none !important;} }
+
+  /* NAV */
+  .topbar{position:sticky; top:0; z-index:50; background:rgba(246,243,236,0.92); backdrop-filter:blur(6px); border-bottom:1px solid var(--line);}
+  .topbar-inner{display:flex; align-items:center; justify-content:space-between; padding:16px 28px; max-width:var(--max); margin:0 auto;}
+  .brand{display:flex; align-items:center; gap:12px;}
+  .brand-mark{width:38px; height:38px; border-radius:2px; background:var(--navy); display:flex; align-items:center; justify-content:center; color:var(--gold-bright); font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:13px; flex-shrink:0;}
+  .brand-name{font-family:'Source Serif 4', serif; font-weight:600; font-size:17px; color:var(--navy-deep); line-height:1.15;}
+  .brand-name span{display:block; font-family:'IBM Plex Sans',sans-serif; font-weight:500; font-size:11.5px; color:var(--steel); margin-top:1px;}
+  nav{display:flex; gap:30px;}
+  nav a{font-size:14.5px; font-weight:500; color:var(--navy); position:relative; padding:4px 0;}
+  nav a.active{color:var(--copper);}
+  nav a::after{content:""; position:absolute; left:0; right:0; bottom:0; height:2px; background:var(--copper); transform:scaleX(0); transform-origin:left; transition:transform .18s ease;}
+  nav a:hover::after, nav a.active::after{transform:scaleX(1);}
+  .nav-cta{background:var(--navy); color:var(--paper) !important; padding:9px 18px; border-radius:2px; font-size:14px; font-weight:600;}
+  .nav-cta::after{display:none;}
+  .nav-cta:hover{background:var(--navy-deep);}
+
+  /* BREADCRUMB */
+  .crumb{padding:20px 28px 0;}
+  .crumb-inner{max-width:var(--max); margin:0 auto; font-size:13px; color:var(--steel); display:flex; gap:8px; align-items:center;}
+  .crumb-inner a:hover{color:var(--copper);}
+  .crumb-inner span{color:#a9a48f;}
+
+  /* HERO */
+  .hero{position:relative; overflow:hidden; background:var(--navy); color:var(--paper); margin-top:16px;}
+  .hero-inner{max-width:var(--max); margin:0 auto; padding:64px 28px 68px; position:relative; z-index:2; display:grid; grid-template-columns:1.2fr 0.8fr; gap:40px; align-items:center;}
+  .hero-eyebrow{font-family:'IBM Plex Mono', monospace; font-size:12.5px; color:var(--gold-bright); letter-spacing:0.04em; margin-bottom:16px; display:block;}
+  .hero h1{color:#fff; font-size:clamp(32px,4vw,48px); line-height:1.1; font-weight:600;}
+  .hero h1 em{font-style:italic; color:var(--gold-bright);}
+  .hero p.lede{margin-top:20px; font-size:16.5px; color:rgba(246,243,236,0.82); max-width:48ch; line-height:1.6;}
+  .hero-actions{display:flex; gap:14px; margin-top:28px; flex-wrap:wrap;}
+  .btn{padding:13px 24px; border-radius:2px; font-size:14.5px; font-weight:600; display:inline-flex; align-items:center; gap:8px; border:1px solid transparent;}
+  .btn-primary{background:var(--copper); color:#fff;}
+  .btn-primary:hover{background:#8a4526;}
+  .btn-ghost{border-color:rgba(246,243,236,0.4); color:var(--paper);}
+  .btn-ghost:hover{border-color:var(--gold-bright); color:var(--gold-bright);}
+  .hero::before{content:""; position:absolute; inset:0; background-image:linear-gradient(rgba(246,243,236,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(246,243,236,0.05) 1px, transparent 1px); background-size:44px 44px; z-index:1;}
+  .age-badge{display:inline-flex; align-items:center; gap:10px; background:rgba(216,184,92,0.12); border:1px solid rgba(216,184,92,0.35); padding:8px 16px; border-radius:2px; margin-top:26px;}
+  .age-badge b{font-family:'IBM Plex Mono',monospace; font-size:13px; color:var(--gold-bright);}
+  .age-badge span{font-size:12.5px; color:rgba(246,243,236,0.7);}
+  .hero-art{position:relative; z-index:2;}
+  .hero-art svg{width:100%; height:auto; display:block;}
+
+  /* SECTIONS */
+  .section{padding:80px 28px;}
+  .section-head{max-width:640px; margin-bottom:48px;}
+  .section-head h2{font-size:clamp(24px,3vw,32px);}
+  .section-head p{margin-top:14px; font-size:16px; color:#4b5262; line-height:1.6;}
+  .section-tag{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--copper); letter-spacing:0.03em; margin-bottom:14px; display:block;}
+
+  /* WHAT-IS split */
+  .what-is{background:#fff; border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .what-grid{display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:start;}
+  .what-copy p{font-size:16px; color:#3a3f49; line-height:1.75; margin:0 0 16px;}
+  .not-list{margin-top:26px; border-top:1px solid var(--line); padding-top:22px;}
+  .not-row{display:flex; gap:14px; padding:10px 0; font-size:14.5px; color:#4b5262;}
+  .not-row b{color:var(--navy-deep); min-width:120px; font-weight:600;}
+  .fact-card{background:var(--paper); border:1px solid var(--line); padding:28px; border-radius:2px;}
+  .fact-card h4{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--steel); letter-spacing:0.03em; margin-bottom:18px; font-weight:600;}
+  .fact-row{display:flex; justify-content:space-between; padding:12px 0; border-bottom:1px solid var(--line); font-size:14.5px;}
+  .fact-row:last-child{border-bottom:none;}
+  .fact-row span:first-child{color:#6a7080;}
+  .fact-row span:last-child{color:var(--navy-deep); font-weight:600; text-align:right;}
+
+  /* SEASON THEME */
+  .theme-band{background:var(--navy-deep); color:var(--paper);}
+  .theme-inner{max-width:var(--max); margin:0 auto; padding:72px 28px; display:grid; grid-template-columns:0.8fr 1.2fr; gap:56px; align-items:center;}
+  .theme-inner h2{color:#fff; font-size:clamp(24px,3vw,30px); max-width:14ch;}
+  .theme-copy p{font-size:15.5px; color:rgba(246,243,236,0.78); line-height:1.7; margin:14px 0 0;}
+  .theme-tag{display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--gold-bright); border:1px solid rgba(216,184,92,0.4); padding:5px 12px; border-radius:100px; margin-bottom:16px;}
+
+  /* TEAMS */
+  .teams-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
+  .team-card{background:var(--paper); padding:32px;}
+  .team-card .num{font-family:'IBM Plex Mono',monospace; font-size:13px; color:var(--steel); font-weight:600;}
+  .team-card h3{font-size:21px; margin-top:8px;}
+  .team-card p{margin-top:14px; font-size:14.5px; color:#565c6b; line-height:1.6;}
+  .team-card .meet{margin-top:18px; padding-top:16px; border-top:1px solid var(--line); font-size:13px; color:var(--ink); display:flex; gap:8px;}
+  .team-card .meet b{color:var(--copper); font-weight:600;}
+
+  /* HOW IT WORKS steps */
+  .steps{background:#fff;}
+  .step-list{counter-reset:step;}
+  .step-row{display:grid; grid-template-columns:56px 1fr; gap:20px; padding:26px 0; border-bottom:1px solid var(--line);}
+  .step-row:first-child{border-top:1px solid var(--line);}
+  .step-num{width:36px; height:36px; border-radius:50%; border:1.5px solid var(--navy); display:flex; align-items:center; justify-content:center; font-family:'IBM Plex Mono',monospace; font-size:13px; font-weight:600; color:var(--navy);}
+  .step-row h4{font-size:17px; font-family:'Source Serif 4',serif; font-weight:600; color:var(--navy-deep);}
+  .step-row p{margin-top:6px; font-size:14.5px; color:#565c6b; line-height:1.6; max-width:60ch;}
+
+  /* FAQ */
+  .faq-item{border-bottom:1px solid var(--line); padding:22px 0;}
+  .faq-item:first-child{border-top:1px solid var(--line);}
+  .faq-item h4{font-size:16px; font-weight:600; color:var(--navy-deep); font-family:'IBM Plex Sans',sans-serif;}
+  .faq-item p{margin-top:8px; font-size:14.5px; color:#565c6b; line-height:1.6;}
+
+  /* JOIN CTA */
+  .join{background:linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%); color:#fff;}
+  .join-inner{max-width:var(--max); margin:0 auto; padding:76px 28px; display:flex; justify-content:space-between; align-items:center; gap:40px; flex-wrap:wrap;}
+  .join h2{color:#fff; font-size:clamp(24px,3.2vw,32px); max-width:20ch;}
+  .join p{color:rgba(246,243,236,0.75); margin-top:12px; font-size:15px;}
+
+  /* FOOTER */
+  footer{background:#fff; border-top:1px solid var(--line);}
+  .footer-inner{max-width:var(--max); margin:0 auto; padding:48px 28px 30px; display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:40px;}
+  .footer-brand p{font-size:13.5px; color:#6a7080; margin-top:14px; max-width:30ch; line-height:1.6;}
+  .footer-col h4{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--steel); letter-spacing:0.03em; margin-bottom:16px; font-weight:600;}
+  .footer-col a{display:block; font-size:14px; color:#3a3f49; margin-bottom:11px;}
+  .footer-col a:hover{color:var(--copper);}
+  .footer-bottom{max-width:var(--max); margin:0 auto; padding:20px 28px; border-top:1px solid var(--line); font-size:12.5px; color:#8a8f99;}
+
+  @media (max-width:860px){
+    nav{display:none;}
+    .hero-inner{grid-template-columns:1fr;}
+    .hero-art{order:-1; max-width:240px; margin:0 auto 10px;}
+    .what-grid{grid-template-columns:1fr;}
+    .theme-inner{grid-template-columns:1fr;}
+    .teams-grid{grid-template-columns:1fr;}
+    .footer-inner{grid-template-columns:1fr 1fr; row-gap:28px;}
+    .step-row{grid-template-columns:36px 1fr;}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <div class="brand-mark">ASA</div>
+      <div class="brand-name">All Saints Robotics<span>FLL Explore · FLL Challenge · FTC</span></div>
+    </div>
+    <nav>
+      <a href="#" class="active">Programs</a>
+      <a href="#">Teams</a>
+      <a href="#">Schedule</a>
+      <a href="#">Join us</a>
+      <a href="#" class="nav-cta">Join a Team</a>
+    </nav>
+  </div>
+</div>
+
+<div class="crumb">
+  <div class="crumb-inner">
+    <a href="#">Home</a><span>/</span><a href="#">Programs</a><span>/</span>
+    <span style="color:var(--navy-deep); font-weight:600;">FLL Explore</span>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <span class="hero-eyebrow">PROGRAM 01 OF 3</span>
+      <h1>FLL Explore is where kids find out <em>they</em> can build things.</h1>
+      <p class="lede">No robot game, no scoreboard pressure — just LEGO-based models, a real-world theme, and a poster board they get to present to grown-ups who actually listen.</p>
+      <div class="hero-actions">
+        <a href="#" class="btn btn-primary">Enroll for next season</a>
+        <a href="#teams" class="btn btn-ghost">Meet the two teams</a>
+      </div>
+      <div class="age-badge"><b>GRADES K–4</b><span>·  Ages 5–10  ·  No experience needed</span></div>
+    </div>
+    <div class="hero-art">
+      <svg viewBox="0 0 320 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration of LEGO-style building blocks">
+        <circle cx="160" cy="150" r="128" stroke="rgba(216,184,92,0.2)" stroke-width="1" fill="none"/>
+        <g>
+          <rect x="90" y="170" width="140" height="60" rx="4" fill="#0E1830" stroke="#D8B85C" stroke-width="1.5"/>
+          <circle cx="115" cy="170" r="9" fill="none" stroke="#D8B85C" stroke-width="1.5"/>
+          <circle cx="160" cy="170" r="9" fill="none" stroke="#D8B85C" stroke-width="1.5"/>
+          <circle cx="205" cy="170" r="9" fill="none" stroke="#D8B85C" stroke-width="1.5"/>
+        </g>
+        <g>
+          <rect x="70" y="110" width="90" height="50" rx="4" fill="#A2542E" stroke="#F6F3EC" stroke-width="1.5"/>
+          <circle cx="92" cy="110" r="7.5" fill="none" stroke="#F6F3EC" stroke-width="1.5"/>
+          <circle cx="115" cy="110" r="7.5" fill="none" stroke="#F6F3EC" stroke-width="1.5"/>
+          <circle cx="138" cy="110" r="7.5" fill="none" stroke="#F6F3EC" stroke-width="1.5"/>
+        </g>
+        <g>
+          <rect x="170" y="100" width="70" height="60" rx="4" fill="#4E6E93" stroke="#F6F3EC" stroke-width="1.5"/>
+          <circle cx="190" cy="100" r="7.5" fill="none" stroke="#F6F3EC" stroke-width="1.5"/>
+          <circle cx="220" cy="100" r="7.5" fill="none" stroke="#F6F3EC" stroke-width="1.5"/>
+        </g>
+        <text x="160" y="280" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="rgba(246,243,236,0.5)" letter-spacing="1">FIG. 01 — SEASON MODEL</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="what-is">
+  <div class="section wrap">
+    <div class="what-grid">
+      <div class="what-copy">
+        <span class="section-tag">WHAT IS EXPLORE</span>
+        <h2 style="margin-bottom:18px;">A first taste of engineering, not a competition</h2>
+        <p>FLL Explore takes a real-world theme — this year, sustainable travel — and asks a team of up to six kids to build a LEGO model showing part of the solution, then explain their thinking to a panel of friendly reviewers.</p>
+        <p>There's no timed robot run and no head-to-head matches. The "win" is finishing the season with a model you built, a notebook you kept, and a two-minute pitch you're proud to give.</p>
+        <div class="not-list">
+          <div class="not-row"><b>It is</b> Model building, teamwork, a season-end showcase, core-values judging.</div>
+          <div class="not-row"><b>It is not</b> A scored robot game, a ranked bracket, or a solo activity.</div>
+        </div>
+      </div>
+      <div class="fact-card">
+        <h4>AT A GLANCE</h4>
+        <div class="fact-row"><span>Grades</span><span>K–4 (ages 5–10)</span></div>
+        <div class="fact-row"><span>Team size</span><span>Up to 6 students</span></div>
+        <div class="fact-row"><span>Season length</span><span>Sept – Dec</span></div>
+        <div class="fact-row"><span>Meets</span><span>Tuesdays, 3:30–4:45pm</span></div>
+        <div class="fact-row"><span>Cost</span><span>$65 / student</span></div>
+        <div class="fact-row"><span>Showcase</span><span>Early December</span></div>
+        <div class="fact-row"><span>Next step</span><span>FLL Challenge (4th gr.)</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="theme-band">
+  <div class="theme-inner">
+    <div>
+      <span class="theme-tag">2026–27 SEASON</span>
+      <h2>This year's theme</h2>
+    </div>
+    <div class="theme-copy">
+      <h3 style="color:#fff; font-size:22px;">SUBMERGED — exploring ocean habitats</h3>
+      <p>Teams research a creature or feature of the underwater world, build a LEGO model of a habitat or invention that helps it, and put together a poster explaining what they learned. Past seasons have covered space travel, urban planning, and recycling.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="teams">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-tag">THIS SEASON'S EXPLORE TEAMS</span>
+      <h2>Two teams, two age bands</h2>
+      <p>Explore teams are grouped loosely by age so the projects and expectations match — kindergartners aren't expected to keep pace with fourth graders.</p>
+    </div>
+    <div class="teams-grid">
+      <div class="team-card">
+        <div class="num">EXP 40221</div>
+        <h3>Little Builders</h3>
+        <p>Grades K–2. Presenting their first model and poster board this December to a panel of parent judges.</p>
+        <div class="meet"><b>Meets</b>&nbsp;Tuesdays</div>
+      </div>
+      <div class="team-card">
+        <div class="num">EXP 40222</div>
+        <h3>Trailblazers</h3>
+        <p>Grades 3–4. Working through the season's engineering notebook one page at a time, building toward Challenge next year.</p>
+        <div class="meet"><b>Meets</b>&nbsp;Tuesdays</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section steps">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-tag">HOW A SEASON WORKS</span>
+      <h2>Four steps from kickoff to showcase</h2>
+    </div>
+    <div class="step-list">
+      <div class="step-row">
+        <div class="step-num">01</div>
+        <div><h4>Kickoff &amp; theme reveal</h4><p>Coaches introduce the season's real-world theme and kids start brainstorming which part of the problem to tackle.</p></div>
+      </div>
+      <div class="step-row">
+        <div class="step-num">02</div>
+        <div><h4>Build &amp; research</h4><p>Weekly Tuesday sessions building the LEGO model, filling out the team notebook, and learning the season's core value.</p></div>
+      </div>
+      <div class="step-row">
+        <div class="step-num">03</div>
+        <div><h4>Practice the pitch</h4><p>The last two weeks focus on presenting — every kid gets a speaking part for showcase day.</p></div>
+      </div>
+      <div class="step-row">
+        <div class="step-num">04</div>
+        <div><h4>Showcase day</h4><p>Teams set up their models and present to a small panel of reviewers — encouraging feedback, no ranking.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:#fff; border-top:1px solid var(--line);">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-tag">COMMON QUESTIONS</span>
+      <h2>Before you enroll</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <h4>Does my child need any LEGO or robotics experience?</h4>
+        <p>None at all. Most Explore families are brand new to LEGO robotics — that's exactly who the program is built for.</p>
+      </div>
+      <div class="faq-item">
+        <h4>Do parents need to volunteer?</h4>
+        <p>We ask each family for a few hours across the season — showcase day setup, snack duty, or notebook help — but no robotics background required.</p>
+      </div>
+      <div class="faq-item">
+        <h4>What happens after Explore?</h4>
+        <p>Most kids move into FLL Challenge around 4th grade, where the LEGO robot starts running an actual scored table.</p>
+      </div>
+      <div class="faq-item">
+        <h4>Is there a robot at all?</h4>
+        <p>Not a competing one — some Explore models include simple LEGO mechanisms like gears or a motor, but there's no robot game.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="join">
+  <div class="join-inner">
+    <div>
+      <h2>Enrollment opens each August</h2>
+      <p>Spots are limited to keep team sizes small. Younger siblings of current families get first priority.</p>
+    </div>
+    <a href="#" class="btn btn-primary">Start an application</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="brand"><div class="brand-mark">ASA</div><div class="brand-name">All Saints Robotics</div></div>
+      <p>A K–12 FIRST robotics program at All Saints Academy, Florissant, MO.</p>
+    </div>
+    <div class="footer-col">
+      <h4>PROGRAM</h4>
+      <a href="#">FLL Explore</a>
+      <a href="#">FLL Challenge</a>
+      <a href="#">FIRST Tech Challenge</a>
+    </div>
+    <div class="footer-col">
+      <h4>CLUB</h4>
+      <a href="#">Teams</a>
+      <a href="#">Schedule</a>
+      <a href="#">Join a team</a>
+    </div>
+  </div>
+  <div class="footer-bottom wrap">© 2026 All Saints Academy Robotics Club</div>
+</footer>
+
+</body>
+</html>
