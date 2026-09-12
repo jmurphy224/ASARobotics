@@ -5,34 +5,35 @@ built as design references before the real WordPress + Bluehost build.
 
 ## Pages
 
+All pages live in `/docs` — this is the single source of truth, and it's also
+what GitHub Pages serves directly, so edits here show up on the live preview.
+
 | File | Page |
 |---|---|
-| `mockups/home.html` | Home |
-| `mockups/programs.html` | Programs (hub) |
-| `mockups/explore.html` | FLL Explore (K–4) |
-| `mockups/challenge.html` | FLL Challenge (4–7) |
-| `mockups/ftc.html` | FIRST Tech Challenge (7–12) |
-| `mockups/teams.html` | Teams (full roster) |
-| `mockups/schedule.html` | Schedule |
-| `mockups/join.html` | Join us |
+| `docs/index.html` | Home |
+| `docs/programs.html` | Programs (hub) |
+| `docs/explore.html` | FLL Explore (K–4) |
+| `docs/challenge.html` | FLL Challenge (4–7) |
+| `docs/ftc.html` | FIRST Tech Challenge (7–12) |
+| `docs/teams.html` | Teams (full roster) |
+| `docs/schedule.html` | Schedule |
+| `docs/join.html` | Join us |
 
 ## Live preview
 
-Once GitHub Pages is enabled (Settings → Pages → Source: `main` branch, `/docs`
-folder), this will be live at:
-
 **https://jmurphy224.github.io/ASARobotics/**
 
-The `/docs` folder is a copy of `/mockups` with real links wired between
-pages (nav, footer, and in-page CTAs) so it's click-through-able instead of
-everything pointing at `#`.
+Nav, footer, and in-page CTAs are all linked between pages, so it's fully
+click-through-able.
 
 ## Status
 
-These are **static, single-file design mockups** — not the live site. Team
-names, costs, meeting times, sponsors, and dates are placeholder content and
-need to be swapped for real info before this becomes the actual WordPress
-build. Nav links point to `#` and the Join us form doesn't submit anywhere yet.
+These are **static, single-file design mockups** — not the live WordPress
+site. Team names, costs, meeting times, and some dates are still placeholder
+content and need to be swapped for real info before this becomes the actual
+WordPress build. The Join us form doesn't submit anywhere yet — that'll need
+a real form plugin (WPForms, Fluent Forms, or similar) once rebuilt in
+WordPress.
 
 Each file is self-contained (inline CSS, Google Fonts via CDN) so you can open
 any one directly in a browser with no build step.
