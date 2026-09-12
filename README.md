@@ -5,26 +5,34 @@ built as design references before the real WordPress + Bluehost build.
 
 ## Pages
 
-All pages live in `/docs` — this is the single source of truth, and it's also
-what GitHub Pages serves directly, so edits here show up on the live preview.
+All pages live at the repo root — this is the single source of truth for
+both the GitHub Pages preview and the Bluehost deployment.
 
 | File | Page |
 |---|---|
-| `docs/index.html` | Home |
-| `docs/programs.html` | Programs (hub) |
-| `docs/explore.html` | FLL Explore (K–4) |
-| `docs/challenge.html` | FLL Challenge (4–7) |
-| `docs/ftc.html` | FIRST Tech Challenge (7–12) |
-| `docs/teams.html` | Teams (full roster) |
-| `docs/schedule.html` | Schedule |
-| `docs/join.html` | Join us |
+| `index.html` | Home |
+| `programs.html` | Programs (hub) |
+| `explore.html` | FLL Explore (K–4) |
+| `challenge.html` | FLL Challenge (4–7) |
+| `ftc.html` | FIRST Tech Challenge (7–12) |
+| `teams.html` | Teams (full roster) |
+| `schedule.html` | Schedule |
+| `join.html` | Join us |
 
 ## Live preview
 
 **https://jmurphy224.github.io/ASARobotics/**
 
+(GitHub Pages source: `main` branch, `/ (root)` folder.)
+
 Nav, footer, and in-page CTAs are all linked between pages, so it's fully
 click-through-able.
+
+## Deploying to Bluehost
+
+This repo is set up to clone directly into `public_html` via cPanel's Git
+Version Control tool — no subfolder shuffling needed, since the files sit at
+root. Clone URL: `https://github.com/jmurphy224/ASARobotics.git`.
 
 ## Status
 
