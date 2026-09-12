@@ -16,6 +16,17 @@ built as design references before the real WordPress + Bluehost build.
 | `mockups/schedule.html` | Schedule |
 | `mockups/join.html` | Join us |
 
+## Live preview
+
+Once GitHub Pages is enabled (Settings → Pages → Source: `main` branch, `/docs`
+folder), this will be live at:
+
+**https://jmurphy224.github.io/ASARobotics/**
+
+The `/docs` folder is a copy of `/mockups` with real links wired between
+pages (nav, footer, and in-page CTAs) so it's click-through-able instead of
+everything pointing at `#`.
+
 ## Status
 
 These are **static, single-file design mockups** — not the live site. Team
