@@ -34,6 +34,13 @@ This repo is set up to clone directly into `public_html` via cPanel's Git
 Version Control tool — no subfolder shuffling needed, since the files sit at
 root. Clone URL: `https://github.com/jmurphy224/ASARobotics.git`.
 
+## WordPress theme
+
+A real, working WordPress theme built from this design lives on the
+[`wordpress-theme`](https://github.com/jmurphy224/ASARobotics/tree/wordpress-theme)
+branch — see that branch's `SETUP.md` for installation, page setup, and menu
+configuration. This `main` branch stays the static-HTML preview only.
+
 ## Status
 
 These are **static, single-file design mockups** — not the live WordPress
